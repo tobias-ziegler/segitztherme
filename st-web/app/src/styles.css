@@ -1,0 +1,10 @@
+.jumbotron {
+    height: 100vh;
+    background-image: url("assets/img/hero_img.jpg");
+    background-size: cover;
+}
+
+.jumbotron p,
+h1 {
+    color: white;
+}
