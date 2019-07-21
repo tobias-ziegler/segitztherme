@@ -8,11 +8,12 @@
 4. Run `npm install -g @angular/cli`
 5. Run `npm install -g gulp-cli`
 6. Run `npm install` within st-web/app
-7. Run `ng build --prod` within st-web/app
-8. Run `npm run deploy` within st-web/app
-9. Execute `setup_xampp.bat`
-10. Start Apache in XAMPP control center
-11. Check out http://localhost:80/st-web to see if it works
+7. Place your xampp folder in the root directory of the cloned repo
+8. Execute `setup_xampp.bat`
+9. Start Apache in XAMPP control center
+10. Run `ng build --prod` within st-web/app
+11. Run `npm run deploy` within st-web/app
+12. Check out http://localhost:80/st-web to see if it works
 
 # Git Workflow
 
