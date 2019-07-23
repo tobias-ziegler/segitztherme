@@ -1,3 +1,19 @@
+/*
+* navbar
+*/
+body,
+p,
+div,
+.navbar-light,
+.navbar-dark .navbar-brand,
+.navbar-nav,
+.nav-link {
+    color: white;
+}
+
+/*
+* hero banner
+*/
 .jumbotron {
     height: 100vh;
     background-image: url("assets/img/hero_img.jpg");
@@ -7,4 +23,28 @@
 .jumbotron p,
 h1 {
     color: white;
+}
+
+hr {
+    border-color: white;
+}
+
+.more-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 13em;
+    height: 5em;
+    background-color: white;
+}
+
+.more-button > .row > i {
+    color: black;
+}
+
+/*
+* misc.
+*/
+.transparent {
+    background-color: transparent;
 }
