@@ -72,7 +72,7 @@
                 $consumItem = new Consumable($data["ver_id"], $data["ver_bezeichnung"],
                                         $data["ver_preis"], $data["ver_steuer"]);
         
-                $listOfConsumables[] = $verpflegung;
+                $listOfConsumables[] = $consumItem;
             }
 
             return $listOfConsumables;
