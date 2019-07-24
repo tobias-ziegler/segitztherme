@@ -1,10 +1,133 @@
-.jumbotron {
+/*
+* navbar
+*/
+body,
+p,
+div/*,
+.navbar-light,
+.navbar-dark .navbar-brand,
+.navbar-nav,
+.nav-link {
+    color: white;
+}*/
+
+.navbar__regular {
+    color: black;
+}
+
+.navbar__landing {
+    color: white;
+}
+
+/*
+* hero banner
+*/
+.hero-banner {
     height: 100vh;
     background-image: url("assets/img/hero_img.jpg");
     background-size: cover;
 }
 
-.jumbotron p,
-h1 {
+.hero-banner * {
     color: white;
+}
+
+hr {
+    border-color: white;
+}
+
+.more-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 13em;
+    height: 5em;
+    background-color: white;
+}
+
+.more-button > .row > i {
+    color: black;
+}
+
+.jumbotron__header {
+    position: absolute;
+    top: 33%;
+}
+
+/*
+* about
+*/
+.about-banner {
+    background-color: white;
+}
+
+.about-banner__description  * {
+    color: #0C408E;
+    border-color: black;
+}
+
+/*
+* prices
+*/
+.price {
+    background-color: #0C408E;
+}
+
+.price__header {
+    color: white;
+}
+
+.price-box {
+    background-color: white;
+}
+
+.price-box * {
+    color: #0C408E;
+    padding: 5%;
+}
+
+/*
+* contact
+*/
+.contact__header * {
+    color: #0C408E;
+    border-color: black;
+}
+
+/*
+* footer
+*/
+.footer-content {
+    background-color: #0C408E;
+}
+
+.footer-content * {
+    color: white;
+}
+
+/*
+* login.
+*/
+.view {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/*
+* misc.
+*/
+.transparent {
+    background-color: transparent;
+}
+
+.view {
+    width: 100vw;
+    height: 100vh;
+}
+
+html * {
+   font-size: 1em;
+   color: #000;
+   font-family: 'Roboto', sans-serif;
 }
