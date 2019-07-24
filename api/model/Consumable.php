@@ -8,7 +8,7 @@
      * 
      * This class represents a Consumable object.
      */
-    class Consumable {
+    class Consumable implements JsonSerializable {
 
         private $ver_id;
 
@@ -41,7 +41,7 @@
             return $this->ver_preis;
         }
 
-        public function setVer_Preis() {
+        public function setVer_Preis($ver_preis) {
             $this->ver_preis = $ver_preis;
         }
 
@@ -51,6 +51,15 @@
 
         public function setVer_Steuer($ver_steuer) {
             $this->ver_steuer = $ver_steuer;
+        }
+
+        public function jsonSerialize() {
+            return [
+                "id" => $this->ver_id,
+                "bezeichnung" => $this->ver_bezeichnung,
+                "preis" => $this->ver_preis,
+                "steuer" => $this->ver_steuer
+            ];
         }
     }
 ?>

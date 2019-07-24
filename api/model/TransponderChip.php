@@ -8,7 +8,7 @@
      * 
      * This class represents a TransponderChip object.
      */
-    class TransponderChip {
+    class TransponderChip implements JsonSerializable {
 
         private $chip_id;
 
@@ -18,6 +18,12 @@
 
         public function getChip_ID() {
             return $this->chip_id;
+        }
+
+        public function jsonSerialize() {
+            return [
+                "id" => $this->chip_id
+            ];
         }
     }
 ?>

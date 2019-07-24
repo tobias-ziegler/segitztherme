@@ -13,13 +13,13 @@
      */
     class DatabaseUtil {
 
-        private const HOST = "localhost";
+        //private const HOST = "localhost";
 
-        private const USER = "root";
+        //private const USER = "root";
 
-        private const PASSWORD = "";
+        //private const PASSWORD = "";
 
-        private const DBNAME = "rfidv4";
+        //private const DBNAME = "rfidv4";
 
         private function __construct() {
 
@@ -29,12 +29,12 @@
          * This method creates a connection to the database.
          */
         private static function getDatabaseConnection() {
-            $Con = mysqli_connect($HOST, $USER, $PASSWORD);
+            $Con = mysqli_connect("localhost", "root", "");
             if($Con == FALSE) {
                 echo "Connection error to database!";
             }
             else {
-                mysqli_select_db($Con, $DBNAME);
+                mysqli_select_db($Con, "test");
             }
 
 		    return $Con;
@@ -44,7 +44,7 @@
          * This method executes the query on the database.
          */
         private static function executeDatabaseQuery($query) {
-            $Con = getDatabaseConnection();
+            $Con = DatabaseUtil::getDatabaseConnection();
 
             $Result = mysqli_query($Con, $query);
 
@@ -57,15 +57,25 @@
          * This method gets the specific Consumable with the consumableID.
          */
         public static function fetchConsumable($consumableID) {
-            $query = "SELECT * FROM verpflegung WHERE";
+            $query = "SELECT * FROM verpflegung WHERE ";
             $query = $query."ver_id = ";
             $query = $query.$consumableID;
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+            
+            // transform mysql result set into object array 
+            $listOfConsumables = array();
 
-            return $Result;
+            while($data = mysqli_fetch_assoc($Result)) {
+                $consumItem = new Consumable($data["ver_id"], $data["ver_bezeichnung"],
+                                        $data["ver_preis"], $data["ver_steuer"]);
+        
+                $listOfConsumables[] = $verpflegung;
+            }
+
+            return $listOfConsumables;
         }
 
         /**
@@ -87,7 +97,7 @@
             $query = $query.");";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -100,7 +110,7 @@
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -110,9 +120,19 @@
             $query = "SELECT * FROM verpflegung;";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+            
+            // transform mysql result set into object array 
+            $listOfConsumables = array();
 
-            return $Result;
+            while($data = mysqli_fetch_assoc($Result)) {
+                $consumItem = new Consumable($data["ver_id"], $data["ver_bezeichnung"],
+                                        $data["ver_preis"], $data["ver_steuer"]);
+        
+                $listOfConsumables[] = $consumItem;
+            }
+
+            return $listOfConsumables;
         }
         
         /**
@@ -125,9 +145,21 @@
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfEmployees = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $employeeObj = new Employee($data["mit_id"], $data["mit_nachname"],
+                                            $data["mit_vorname"], $data["mit_strasse"],
+                                            $data["mit_ort"], $data["mit_plz"],
+                                            $data["mit_login"], $data["mit_passwort"]);
+        
+                $listOfEmployees[] = $employeeObj;
+            }
+
+            return $listOfEmployees;
         }
 
         /**
@@ -163,7 +195,7 @@
             $query = $query.");";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -176,7 +208,7 @@
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -186,9 +218,21 @@
             $query = "SELECT * FROM mitarbeiter;";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfEmployees = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $employeeObj = new Employee($data["mit_id"], $data["mit_nachname"],
+                                            $data["mit_vorname"], $data["mit_strasse"],
+                                            $data["mit_ort"], $data["mit_plz"],
+                                            $data["mit_login"], $data["mit_passwort"]);
+        
+                $listOfEmployees[] = $employeeObj;
+            }
+
+            return $listOfEmployees;
         }
 
         /**
@@ -201,9 +245,18 @@
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfChips = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $chipObj = new TransponderChip($data["chip_id"]);
+        
+                $listOfChips[] = $chipObj;
+            }
+
+            return $listOfChips;
         }
 
         /**
@@ -217,7 +270,7 @@
             $query = $query.");";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -230,7 +283,7 @@
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -240,132 +293,183 @@
             $query = "SELECT * FROM chip;";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfChips = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $chipObj = new TransponderChip($data["chip_id"]);
+        
+                $listOfChips[] = $chipObj;
+            }
+
+            return $listOfChips;
         }
 
         /**
-         * This method gets the specific Customer with the customerID.
+         * This method gets the specific VIPCustomer with the customerID.
          */
-        public static function fetchCustomer($customerID) {
-            $query = "SELECT * FROM kunde WHERE ";
+        public static function fetchVIPCustomer($customerID) {
+            $query = "SELECT * FROM vip_kunde WHERE ";
             $query = $query."kun_id = ";
             $query = $query.$customerID;
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfVIPCustomers = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $vipCustomerObj = new VIPCustomer($data["kun_id"], $data["vip_id"],
+                                                    $data["kun_nachname"], $data["kun_vorname"],
+                                                    $data["kun_geburtsdatum"]);
+        
+                $listOfVIPCustomers[] = $vipCustomerObj;
+            }
+
+            return $listOfVIPCustomers;
         }
 
         /**
-         * This method adds an Customer to the database.
+         * This method adds an VIPCustomer to the database.
          */
-        public static function addCustomer($customer) {
-            $query = "INSERT INTO kunde (";
+        public static function addVIPCustomer($vipCustomer) {
+            $query = "INSERT INTO vip_kunde (";
             $query = $query."vip_id, ";
             $query = $query."kun_vorname, ";
             $query = $query."kun_nachname, ";
             $query = $query."kun_geburtsdatum";
             $query = $query.") VALUES (";
-            $query = $query.$customer->getVIPCard_ID();
+            $query = $query.$vipCustomer->getVIPCard_ID();
             $query = $query.", ";
             $query = $query."\"";
-            $query = $query.$customer->getKun_Vorname();
-            $query = $query."\"";
-            $query = $query.", ";
-            $query = $query."\"";
-            $query = $query.$customer->getKun_Nachname();
+            $query = $query.$vipCustomer->getKun_Vorname();
             $query = $query."\"";
             $query = $query.", ";
             $query = $query."\"";
-            $query = $query.$customer->getKun_Geburtsdatum();
+            $query = $query.$vipCustomer->getKun_Nachname();
+            $query = $query."\"";
+            $query = $query.", ";
+            $query = $query."\"";
+            $query = $query.$vipCustomer->getKun_Geburtsdatum();
             $query = $query."\"";
             $query = $query.");";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
-         * This method deletes a Customer from the database.
+         * This method deletes a VIPCustomer from the database.
          */
-        public static function deleteCustomer($customerID) {
-            $query = "DELETE FROM kunde WHERE ";
+        public static function deleteVIPCustomer($customerID) {
+            $query = "DELETE FROM vip_kunde WHERE ";
             $query = $query."kun_id = ";
             $query = $query.$customerID;
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
          * This method delivers all Customers from the database.
          */
-        public static function getAllCustomers() {
-            $query = "SELECT * FROM kunde;";
+        public static function getAllVIPCustomers() {
+            $query = "SELECT * FROM vip_kunde;";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfVIPCustomers = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $vipCustomerObj = new VIPCustomer($data["kun_id"], $data["vip_id"],
+                                                    $data["kun_nachname"], $data["kun_vorname"],
+                                                    $data["kun_geburtsdatum"]);
+        
+                $listOfVIPCustomers[] = $vipCustomerObj;
+            }
+
+            return $listOfVIPCustomers;
         }
 
         /**
          * This method gets the specific VIPCard with the vip_id.
          */
         public static function fetchVIPCard($vip_id) {
-            $query = "SELECT * FROM vip WHERE ";
+            $query = "SELECT * FROM vip_karte WHERE ";
             $query = $query."vip_id = ";
             $query = $query.$vip_id;
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
 
-            return $Result;
+            // transform mysql result set into object array 
+            $listOfVIPCards = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $vipCardObj = new VIPCard($data["vip_id"], $data["vip_guthaben"],
+                                            $data["vip_kategorie"], $data["vip_rabatt"]);
+        
+                $listOfVIPCards[] = $vipCardObj;
+            }
+
+            return $listOfVIPCards;
         }
 
         /**
          * This method adds an VIPCard to the database.
          */
         public static function addVIPCard($vipCard) {
-            $query = "INSERT INTO vip (";
+            $query = "INSERT INTO vip_karte (";
             $query = $query."vip_guthaben";
             $query = $query.") VALUES (";
             $query = $query.$vipCard->getVIP_Guthaben();
             $query = $query.");";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
          * This method deletes a VIPCard from the database.
          */
         public static function deleteVIPCard($vip_id) {
-            $query = "DELETE FROM vip WHERE ";
+            $query = "DELETE FROM vip_karte WHERE ";
             $query = $query."vip_id = ";
             $query = $query.$vip_id;
             $query = $query.";";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
          * This method delivers all VIPCards from the database.
          */
         public static function getAllVIPCards() {
-            $query = "SELECT * FROM vip;";
+            $query = "SELECT * FROM vip_karte;";
 
             // execute $query on DB
-            $Result = executeDatabaseQuery($query);
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+            
+            // transform mysql result set into object array 
+            $listOfVIPCards = array();
 
-            return $Result;
+            while($data = mysqli_fetch_assoc($Result)) {
+                $vipCardObj = new VIPCard($data["vip_id"], $data["vip_guthaben"],
+                                            $data["vip_kategorie"], $data["vip_rabatt"]);
+        
+                $listOfVIPCards[] = $vipCardObj;
+            }
+
+            return $listOfVIPCards;
         }
     }
 ?>

@@ -8,7 +8,7 @@
      * 
      * This class represents an Stay object.
      */
-    class Stay {
+    class Stay implements JsonSerializable {
 
         private $auf_id;
 
@@ -96,6 +96,19 @@
 
         public function setAuf_Abfahrt($auf_abfahrt) {
             $this->auf_abfahrt = $auf_abfahrt;
+        }
+
+        public function jsonSerialize() {
+            return [
+                "id" => $this->auf_id,
+                "chipId" => $this->chip_id,
+                "entranceId" => $this->ein_id,
+                "mitId_ankunft" => $this->mit_id_an,
+                "mitId_abfahrt" => $this->mit_id_ab,
+                "kunId" => $this->kun_id,
+                "ankunft" => $this->auf_ankunft,
+                "abfahrt" => $this->auf_abfahrt
+            ];
         }
     }
 ?>

@@ -8,7 +8,7 @@
      * 
      * This class represents a Customer object.
      */
-    class Customer {
+    class VIPCustomer implements JsonSerializable {
 
         private $kun_id;
 
@@ -62,6 +62,16 @@
 
         public function setKun_Geburtsdatum($kun_geburtsdatum) {
             $this->kun_geburtsdatum = $kun_geburtsdatum;
+        }
+
+        public function jsonSerialize() {
+            return [
+                "id" => $this->kun_id,
+                "vipcardId" => $this->vipcard_id,
+                "nachname" => $this->kun_nachname,
+                "vorname" => $this->kun_vorname,
+                "geburtsdatum" => $this->kun_geburtsdatum
+            ];
         }
     }
 ?>

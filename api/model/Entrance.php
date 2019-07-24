@@ -8,7 +8,7 @@
      * 
      * This class represents an Entrance object.
      */
-    class Entrance {
+    class Entrance implements JsonSerializable {
 
         private $ein_id;
 
@@ -51,6 +51,15 @@
 
         public function setEin_Dauer($ein_dauer) {
             $this->ein_dauer = $ein_dauer;
+        }
+
+        public function jsonSerialize() {
+            return [
+                "id" => $this->ein_id,
+                "kategorie" => $this->ein_kategorie,
+                "preis" => $this->ein_preis,
+                "dauer" => $this->ein_dauer
+            ];
         }
     }
 ?>

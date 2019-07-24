@@ -8,7 +8,7 @@
      * 
      * This class represents an Purchase object.
      */
-    class Purchase {
+    class Purchase implements JsonSerializable {
 
         private $ein_id;
 
@@ -62,6 +62,16 @@
 
         public function setEin_Menge($ein_menge) {
             $this->ein_menge = $ein_menge;
+        }
+
+        public function jsonSerialize() {
+            return [
+                "id" => $this->ein_id,
+                "auf_id" => $this->auf_id,
+                "ver_id" => $this->ver_id,
+                "betrag" => $this->ein_betrag,
+                "menge" => $this->ein_menge
+            ];
         }
     }
 ?>
