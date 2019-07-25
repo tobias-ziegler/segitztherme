@@ -71,8 +71,31 @@ export class RestaurantComponent implements OnInit {
         return total;
     }
 
+    private getCart(): Array<any> {
+        const cartItems: Array<any> = [];
+        for (let i = 0; i < this.consumables.length; i++) {
+            for (let j = 0; j < this.consumables[i].length; j++) {
+                if (this.consumables[i][j].count > 0) {
+                    cartItems.push(this.consumables[i][j]);
+                }
+            }
+        }
+        return cartItems;
+    }
+
     public onBookButtonClicked() {
-        console.log(this.consumables);
+        sessionStorage.setItem(
+            "cartTotal",
+            JSON.stringify({ total: this.calculateTotal() })
+        );
+        this.httpClient
+            .post(
+                "http://localhost:80/api/Restaurant.php",
+                JSON.stringify(this.getCart())
+            )
+            .subscribe(() => {
+                window.location.reload(false);
+            });
     }
 
     public onMenuButtonClicked() {

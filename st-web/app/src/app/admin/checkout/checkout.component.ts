@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
     selector: "app-checkout",
@@ -9,7 +10,7 @@ import { Router } from "@angular/router";
 export class CheckoutComponent implements OnInit {
     public price: any;
 
-    constructor(private router: Router) {}
+    constructor(private httpClient: HttpClient, private router: Router) {}
 
     ngOnInit() {}
 
@@ -17,5 +18,12 @@ export class CheckoutComponent implements OnInit {
         this.router.navigate(["selection"]);
     }
 
-    public onCheckoutButtonClicked(): void {}
+    public onCheckoutButtonClicked(): void {
+        this.price = JSON.parse(sessionStorage.getItem("cartTotal"))["total"];
+        this.httpClient
+            .post("http://localhost:80/api/CheckOut.php", JSON.stringify({}))
+            .subscribe(() => {
+                window.location.reload();
+            });
+    }
 }

@@ -34,10 +34,13 @@ export class CheckinComponent implements OnInit {
         }
 
         this.httpClient
-            .post("http://localhost:80/api/CheckIn.php", {
-                priceId: this.selectedPrice.id,
-                employeeId: this.employeeID.nativeElement.value
-            })
+            .post(
+                "http://localhost:80/api/CheckIn.php",
+                JSON.stringify({
+                    priceId: this.selectedPrice.id,
+                    employeeId: this.employeeID.nativeElement.value
+                })
+            )
             .subscribe(() => {
                 window.location.reload(false);
             });
