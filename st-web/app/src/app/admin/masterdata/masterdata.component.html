@@ -1,0 +1,367 @@
+<app-header></app-header>
+<div class="container view">
+    <div style="position: relative; top: 15%" class="row align-items-center">
+        <div class="col">
+            <h1 class="display-4">Stammdatenverwaltung</h1>
+        </div>
+    </div>
+    <div
+        style="position: relative; top: 25%"
+        class="row justify-content-around"
+    >
+    <div class="col">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button
+                            class="btn btn-link"
+                            data-toggle="collapse"
+                            data-target="#collapseOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                        >
+                            Speisen & Getränke
+                        </button>
+                    </h5>
+                </div>
+
+                <div
+                    id="collapseOne"
+                    class="collapse show"
+                    aria-labelledby="headingOne"
+                    data-parent="#accordion"
+                >
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Bezeichnung</th>
+                                    <th scope="col">Preis</th>
+                                    <th scope="col">Steuer</th>
+                                    <th scope="col">Ändern</th>
+                                    <th scope="col">Löschen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let consumable of consumables">
+                                    <th scope="row">{{ consumable.id }}</th>
+                                    <td>
+                                        <input [(ngModel)]="consumable.bezeichnung" value="{{ consumable.bezeichnung }}" />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="consumable.preis"
+                                            value="{{ consumable.preis }}"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="consumable.steuer" value="{{ consumable.steuer }}" />
+                                    </td>
+                                    <td>
+                                        <a href="" (click)="updateConsumable($event, consumable); false">
+                                            <i class="material-icons">
+                                                check_circle
+                                            </i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" (click)="deleteConsumable($event, consumable.id); false">
+                                            <i class="material-icons">
+                                                delete
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td>
+                                            <input #consumableDescription placeholder="Bezeichnung" />
+                                        </td>
+                                        <td>
+                                            <input #consumablePrice
+                                                placeholder="Preis"
+                                            />
+                                        </td>
+                                        <td>
+                                            <input #consumableTax placeholder="Steuer" />
+                                        </td>
+                                        <td>
+                                            <a href="" (click)="createConsumable($event); false">
+                                                <i class="material-icons">
+                                                    add_box
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button
+                            class="btn btn-link collapsed"
+                            data-toggle="collapse"
+                            data-target="#collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseTwo"
+                        >
+                            Chips
+                        </button>
+                    </h5>
+                </div>
+                <div
+                    id="collapseTwo"
+                    class="collapse"
+                    aria-labelledby="headingTwo"
+                    data-parent="#accordion"
+                >
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Löschen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let chip of chips">
+                                    <th scope="row">{{ chip.id }}</th>
+                                    <td>
+                                        <a href="" (click)="deleteChip($event, chip.id); false">
+                                            <i class="material-icons">
+                                                delete
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <a href="" (click)="createChip($event); false">
+                                            <i class="material-icons">
+                                                add_box
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button
+                            class="btn btn-link collapsed"
+                            data-toggle="collapse"
+                            data-target="#collapseThree"
+                            aria-expanded="false"
+                            aria-controls="collapseThree"
+                        >
+                            Mitarbeiter
+                        </button>
+                    </h5>
+                </div>
+                <div
+                    id="collapseThree"
+                    class="collapse"
+                    aria-labelledby="headingThree"
+                    data-parent="#accordion"
+                >
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Vorname</th>
+                                    <th scope="col">Nachname</th>
+                                    <th scope="col">Straße</th>
+                                    <th scope="col">Ort</th>
+                                    <th scope="col">PLZ</th>
+                                    <th scope="col">Ändern</th>
+                                    <th scope="col">Löschen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let employee of employees">
+                                    <th scope="row">{{ employee.id }}</th>
+                                    <td>
+                                        <input [(ngModel)]="employee.vorname" value="{{ employee.vorname }}" />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="employee.nachname"
+                                            value="{{ employee.nachname }}"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="employee.strasse" value="{{ employee.strasse }}" />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="employee.ort" value="{{ employee.ort }}" />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="employee.plz" value="{{ employee.plz }}" />
+                                    </td>
+                                    <td>
+                                        <a href="" (click)="updateEmployee($event, employee); false">
+                                            <i class="material-icons">
+                                                check_circle
+                                            </i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" (click)="deleteEmployee($event, employee.id); false">
+                                            <i class="material-icons">
+                                                delete
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td>
+                                            <input #employeeFirstName placeholder="Vorname" />
+                                        </td>
+                                        <td>
+                                            <input #employeeLastName
+                                                placeholder="Nachname"
+                                            />
+                                        </td>
+                                        <td>
+                                            <input #employeeStreet placeholder="Straße" />
+                                        </td>
+                                        <td>
+                                            <input #employeeCity placeholder="Ort" />
+                                        </td>
+                                        <td>
+                                            <input #employeePostalCode placeholder="PLZ" />
+                                        </td>
+                                        <td>
+                                            <a href="" (click)="createEmployee($event); false">
+                                                <i class="material-icons">
+                                                    add_box
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button
+                            class="btn btn-link collapsed"
+                            data-toggle="collapse"
+                            data-target="#collapseFour"
+                            aria-expanded="false"
+                            aria-controls="collapseFour"
+                        >
+                            VIP Kunden
+                        </button>
+                    </h5>
+                </div>
+                <div
+                    id="collapseFour"
+                    class="collapse"
+                    aria-labelledby="headingFour"
+                    data-parent="#accordion"
+                >
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">VIP-Karten ID</th>
+                                    <th scope="col">Vorname</th>
+                                    <th scope="col">Nachname</th>
+                                    <th scope="col">Geburtsdatum</th>
+                                    <th scope="col">Ändern</th>
+                                    <th scope="col">Löschen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let vipCustomer of vipCustomers">
+                                    <th scope="row">{{ vipCustomer.id }}</th>
+                                    <td>
+                                        <input value="{{ vipCustomer.vipcardId }}" />
+                                    </td>
+                                    <td>
+                                        <input
+                                            value="{{ vipCustomer.vorname }}"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input value="{{ vipCustomer.nachname }}" />
+                                    </td>
+                                    <td>
+                                        <input value="{{ vipCustomer.geburtsdatum }}" />
+                                    </td>
+                                    <td>
+                                        <a href="">
+                                            <i class="material-icons">
+                                                check_circle
+                                            </i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="">
+                                            <i class="material-icons">
+                                                delete
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td>
+                                            <input placeholder="VIP-Karten ID" />
+                                        </td>
+                                        <td>
+                                            <input
+                                                placeholder="Vorname"
+                                            />
+                                        </td>
+                                        <td>
+                                            <input placeholder="Nachname" />
+                                        </td>
+                                        <td>
+                                            <input placeholder="Geburtsdatum" />
+                                        </td>
+                                        <td>
+                                            <a href="">
+                                                <i class="material-icons">
+                                                    add_box
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin: 5%"class="text-center">
+                <button
+                    (click)="onMenuButtonClicked()"
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                >
+                    Menü
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
