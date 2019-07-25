@@ -34,7 +34,7 @@
                 echo "Connection error to database!";
             }
             else {
-                mysqli_select_db($Con, "test");
+                mysqli_select_db($Con, "segitzThermeDatenbank");
             }
 
 		    return $Con;
@@ -43,7 +43,7 @@
         /**
          * This method executes the query on the database.
          */
-        private static function executeDatabaseQuery($query) {
+        public static function executeDatabaseQuery($query) {
             $Con = DatabaseUtil::getDatabaseConnection();
 
             $Result = mysqli_query($Con, $query);
@@ -496,7 +496,7 @@
             $listOfVIPCustomers = array();
 
             while($data = mysqli_fetch_assoc($Result)) {
-                $vipCustomerObj = new VIPCustomer($data["kun_id"], $data["vip_id"],
+                $vipCustomerObj = new VIPCustomer($data["kun_id"], $data["kar_id"],
                                                     $data["kun_nachname"], $data["kun_vorname"],
                                                     $data["kun_geburtsdatum"]);
         

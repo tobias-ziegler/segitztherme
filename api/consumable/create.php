@@ -6,7 +6,7 @@
 
     $JsonConsumable = json_decode(file_get_contents('php://input'));
 
-    $consumable = new Employee($JsonConsumable->{"id"}, $JsonConsumable->{"bezeichnung"},
+    $consumable = new Consumable($JsonConsumable->{"id"}, $JsonConsumable->{"bezeichnung"},
                             $JsonConsumable->{"preis"}, $JsonConsumable->{"steuer"});
 
     DatabaseUtil::addConsumable($consumable);
