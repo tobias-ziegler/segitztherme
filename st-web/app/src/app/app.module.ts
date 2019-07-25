@@ -19,6 +19,9 @@ import { CheckinComponent } from "./admin/checkin/checkin.component";
 import { RestaurantComponent } from "./admin/restaurant/restaurant.component";
 import { StatisticsComponent } from "./admin/statistics/statistics.component";
 import { CheckoutComponent } from "./admin/checkout/checkout.component";
+import { LeisureComponent } from "./leisure/leisure.component";
+import { SpaComponent } from "./spa/spa.component";
+import { SaunaComponent } from "./sauna/sauna.component";
 
 const appRoutes: Routes = [
     { path: "home", component: HomeComponent },
@@ -29,6 +32,9 @@ const appRoutes: Routes = [
     { path: "checkout", component: CheckoutComponent },
     { path: "restaurant", component: RestaurantComponent },
     { path: "statistics", component: StatisticsComponent },
+    { path: "leisure", component: LeisureComponent },
+    { path: "spa", component: SpaComponent },
+    { path: "sauna", component: SaunaComponent },
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "**", redirectTo: "/home", pathMatch: "full" }
 ];
@@ -49,7 +55,10 @@ const appRoutes: Routes = [
         CheckinComponent,
         RestaurantComponent,
         StatisticsComponent,
-        CheckoutComponent
+        CheckoutComponent,
+        LeisureComponent,
+        SpaComponent,
+        SaunaComponent
     ],
     imports: [
         BrowserModule,

@@ -106,6 +106,48 @@ hr {
 }
 
 /*
+* leisure
+*/
+.leisure-banner {
+    background-image: url("assets/img/leisure.jpg");
+    background-size: cover;
+    margin-top: 4%;
+    height: 35vh;
+}
+
+.leisure-banner * {
+    border-color: black;
+}
+
+/*
+* spa
+*/
+.spa-banner {
+    background-image: url("assets/img/spa.jpg");
+    background-size: cover;
+    margin-top: 4%;
+    height: 35vh;
+}
+
+.spa-banner * {
+    border-color: black;
+}
+
+/*
+* sauna
+*/
+.sauna-banner {
+    background-image: url("assets/img/sauna.jpg");
+    background-size: cover;
+    margin-top: 4%;
+    height: 35vh;
+}
+
+.sauna-banner * {
+    border-color: black;
+}
+
+/*
 * login.
 */
 .view {
