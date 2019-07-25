@@ -7,25 +7,27 @@ $Raspb1Port = '9020';
 
 
 // Verbindungsaufbau zum Check In / Check Out Terminal
-if (!isset($_SESSION['CONNECT'])) {
+//if (!isset($_SESSION['CONNECT'])) {
 
     // Neues Treiber-Objekt erzeugen, über das der Zugriff auf alle Raspberry-Funktionen erfolgt
     // Bei der Objekterzeugung werden die IP-Adresse und der Port des Servers übergeben
-    $conPi1 = new CRaspberrySR($Raspb1IP, $Raspb1Port);
-    $_SESSION['CONNECT'] = $conPi1;
-    $conPi1->Connect();
-}
-else {
-    $conPi1 = $_SESSION['CONNECT'];
-    $conPi1->Connect();
-}
+$conPi1 = new CRaspberrySR($Raspb1IP, $Raspb1Port);
+$_SESSION['CONNECT'] = $conPi1;
+$conPi1->Connect();
+//}
+//else {
+//    $conPi1 = $_SESSION['CONNECT'];
+//    $conPi1->Connect();
+//}
+
+
 // Die Funktion beinhaltet die Logik zum einmaligen Initialieren des Chips und legt den Zugriffschlüssel für die Lese und Schreibberechtigungen fest.
 // Sie Wird vom Check In Terminal aufgerufen (RaspBPi 1 Reader Schnittstelle 0)
 function initChip (){
 // Zugriffsschlüssel für den Manufacturer - Block im Sekor 1 des NFC Chips (beinhaltet die UID)
-public function writeRFIDNewKey(0, 0, "FF:FF:FF:FF:FF:FF", "12:34:56:78:90:AB");
+writeRFIDNewKey(0, 0, "FF:FF:FF:FF:FF:FF", "12:34:56:78:90:AB");
 // Zugriffsschlüssel für den Sektor 8 des NFC Chips (beinhaltet die Ausgangsberechtigung)
-public function writeRFIDNewKey(0, 8, "FF:FF:FF:FF:FF:FF", "12:34:56:78:90:AB");
+writeRFIDNewKey(0, 8, "FF:FF:FF:FF:FF:FF", "12:34:56:78:90:AB");
 
 }
 

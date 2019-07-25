@@ -13,10 +13,10 @@ $Raspb1Port = '9021';
 
     // Neues Treiber-Objekt erzeugen, über das der Zugriff auf alle Raspberry-Funktionen erfolgt
     // Bei der Objekterzeugung werden die IP-Adresse und der Port des Servers übergeben
-    $conPi2 = new CRaspberrySR($Raspb1IP, $Raspb1Port);
-    $_SESSION['CONNECT'] = $conPi2;
-    $conPi2->Connect();
-}
+$conPi2 = new CRaspberrySR($Raspb1IP, $Raspb1Port);
+$_SESSION['CONNECT'] = $conPi2;
+$conPi2->Connect();
+//}
 //else {
 //    $conPi2 = $_SESSION['CONNECT'];
 //    $conPi2->Connect();
@@ -50,16 +50,21 @@ function scanVIPCard(){
     
 return $UID;
 }
-// Diese Funktion setzt den Ausgangs-BerechtigungsIndikator auf 0 und signalisiert so den negativen Stand des Kundenkonto.
-// Die Auswahl des Scanners ist bereits hartcodiert (RPI 2.0)
-// Die UID des Chips wird für die weitere Verarbeitung zurück gegeben
+	// Diese Funktion setzt den Ausgangs-BerechtigungsIndikator auf 0 und signalisiert so den negativen Stand des Kundenkonto.
+	// Die Auswahl des Scanners ist bereits hartcodiert (RPI 2.0)
+	// Die UID des Chips wird für die weitere Verarbeitung zurück gegeben
 function purchaseItemandChargeChip(){
 		$UID = getUid(0);
         // set exitPermitted to false;
          $result = $conPi2->writeRFID_Byte(0, 8, 0, 0, '0', '12:34:56:78:90:AB');
          return $UID;
 }
-
+function unchargeChip(){
+		
+        // set exitPermitted to false;
+         $result = $conPi1->writeRFID_Byte(0, 8, 0, 0, '1', '12:34:56:78:90:AB');
+         return $result;
+}
 
 
 // langer Piepton + kurzer Piepton + grüne LED 
