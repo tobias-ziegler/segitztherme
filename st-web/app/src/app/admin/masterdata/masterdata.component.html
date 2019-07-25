@@ -186,6 +186,7 @@
                                     <th scope="col">Straße</th>
                                     <th scope="col">Ort</th>
                                     <th scope="col">PLZ</th>
+                                    <th scope="col">Login</th>
                                     <th scope="col">Ändern</th>
                                     <th scope="col">Löschen</th>
                                 </tr>
@@ -209,6 +210,9 @@
                                     </td>
                                     <td>
                                         <input [(ngModel)]="employee.plz" value="{{ employee.plz }}" />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="employee.login" value="{{ employee.login }}" />
                                     </td>
                                     <td>
                                         <a href="" (click)="updateEmployee($event, employee); false">
@@ -243,6 +247,9 @@
                                         </td>
                                         <td>
                                             <input #employeePostalCode placeholder="PLZ" />
+                                        </td>
+                                        <td>
+                                            <input #employeeLogin placeholder="Login" />
                                         </td>
                                         <td>
                                             <a href="" (click)="createEmployee($event); false">

@@ -35,6 +35,9 @@ export class MasterdataComponent implements OnInit {
     @ViewChild("employeePostalCode", { static: false })
     public employeePostalCode: ElementRef;
 
+    @ViewChild("employeeLogin", { static: false })
+    public employeeLogin: ElementRef;
+
     public consumables: any;
     public chips: any;
     public employees: any;
@@ -165,7 +168,7 @@ export class MasterdataComponent implements OnInit {
                     strasse: this.employeeStreet.nativeElement.value,
                     ort: this.employeeCity.nativeElement.value,
                     plz: this.employeePostalCode.nativeElement.value,
-                    login: "",
+                    login: this.employeeLogin.nativeElement.value,
                     passwort: ""
                 })
             )

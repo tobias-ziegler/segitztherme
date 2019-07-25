@@ -1,3 +1,4 @@
+import { PrintService } from "./../../service/print.service";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
@@ -14,7 +15,11 @@ export class CheckinComponent implements OnInit {
     public prices: any;
     public selectedPrice: any;
 
-    constructor(private httpClient: HttpClient, private router: Router) {}
+    constructor(
+        private httpClient: HttpClient,
+        private router: Router,
+        private printService: PrintService
+    ) {}
 
     ngOnInit() {
         this.httpClient
@@ -44,6 +49,13 @@ export class CheckinComponent implements OnInit {
             .subscribe(() => {
                 window.location.reload(false);
             });
+    }
+
+    public onPrintButtonClicked(): void {
+        this.printService.printCheckinReceipt(
+            this.selectedPrice.preis,
+            this.selectedPrice.kategorie
+        );
     }
 
     public onMenuButtonClicked(): void {

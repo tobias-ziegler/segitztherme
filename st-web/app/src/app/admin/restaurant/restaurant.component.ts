@@ -88,6 +88,7 @@ export class RestaurantComponent implements OnInit {
             "cartTotal",
             JSON.stringify({ total: this.calculateTotal() })
         );
+        sessionStorage.setItem("cart", JSON.stringify(this.getCart()));
         this.httpClient
             .post(
                 "http://localhost:80/api/Restaurant.php",
