@@ -34,7 +34,7 @@
                 echo "Connection error to database!";
             }
             else {
-                mysqli_select_db($Con, "dummy");
+                mysqli_select_db($Con, "segitzThermeDatenbank");
             }
 
 		    return $Con;
@@ -204,7 +204,6 @@
          * This method adds an Employee to the database.
          */
         public static function addEmployee($employee) {
-            echo json_encode($employee);
             $query = "INSERT INTO mitarbeiter (";
             $query = $query."mit_nachname, ";
             $query = $query."mit_vorname, ";
@@ -323,7 +322,7 @@
             $query = $query."chip_id";
             $query = $query.") VALUES (";
             $query = $query."\"";
-            $query = $query.$chipID->getChip_ID();
+            $query = $query.$chipID;
             $query = $query."\"";
             $query = $query.");";
 
@@ -335,7 +334,6 @@
          * This method deletes a Chip from the database.
          */
         public static function deleteChip($chipID) {
-            echo json_encode($chipID);
             $query = "DELETE FROM chip WHERE ";
             $query = $query."chip_id = ";
             $query = $query."\"";
@@ -601,6 +599,101 @@
             // execute $query on DB
             $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
+		
+		/**
+         * This method delivers all Costumer stays from the database.
+         */
+		public static function getAllStays() {
+            $query = "SELECT * FROM aufenthalt;";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+            
+            // transform mysql result set into object array 
+            $listOfStays = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $stayObj = new Stay($data["auf_id"], $data["chip_id"],
+                                            $data["ein_id"], $data["mit_id_an"]
+											, $data["mit_id_ab"], $data["kun_id"]
+											, $data["auf_ankunft"], $data["auf_abfahrt"]);
+        
+                $listOfStays[] = $stayObj;
+            }
+
+            return $listOfStays;
+        }
+		/**
+         * This method gets the specific stay with the stay_id.
+         */
+        public static function fetchStay($auf_id) {
+            $query = "SELECT * FROM aufenthalt WHERE ";
+            $query = $query."auf_id = ";
+            $query = $query.$auf_id;
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+
+            // transform mysql result set into object array 
+            $listStays = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $stayObj = new Stay($data["auf_id"], $data["chip_id"],
+                                            $data["ein_id"], $data["mit_id_an"]
+											, $data["mit_id_ab"], $data["kun_id"]
+											, $data["auf_ankunft"], $data["auf_abfahrt"]);
+        
+                $listOfStays[] = $stayObj;
+            }
+
+            return $listOfStays;
+        }
+		 /**
+         * This method adds a stay to the database.
+         */
+        public static function addStay($stay, $chip_id) {
+            $query = "INSERT INTO aufenthalt (";
+            $query .= "chip_id, ein_id, mit_id_an, mit_id_ab, kun_id, auf_ankunft, auf_abfahrt";
+            $query .= ") VALUES (";
+			$query .= "\"";
+            $query .= $chip_id;
+			$query .= "\"";
+            $query .= ", ";
+			$query .= "\"";
+			$query .= $stay->getEin_id();
+			$query .= "\"";
+            $query .= ", ";
+			$query .= "\"";
+			$query .= $stay->getMit_id_an();
+			$query .= "\"";
+            $query .= ", ";
+			$query .= "\"";
+			if($stay->getMit_id_ab() == ""){
+				$query .= "null";
+			}
+			else{
+			$query .= $stay->getMit_id_ab();
+			}
+			$query .= "\"";
+            $query .= ", ";
+			$query .= "\"";
+			$query .= $stay->getKun_id();
+			$query .= "\"";
+            $query .= ", ";
+			$query .= "\"";
+			$query .= $stay->getAuf_ankunft();
+			$query .= "\"";
+            $query .= ", ";
+			$query .= "\"";
+			$query .= $stay->getAuf_abfahrt();
+			$query .= "\"";
+            $query .= ");";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+			echo $query;
+        }
 
         /**
          * This method delivers all Entrances from the database.
@@ -622,6 +715,40 @@
             }
 
             return $listOfEntrances;
+        }
+
+        /**
+         * This method deletes a VIPCard from the database.
+         */
+        public static function deleteStay($auf_id) {
+            $query = "DELETE FROM aufenthalt WHERE ";
+            $query = $query."auf_id = ";
+            $query = $query.$auf_id;
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+		public static function fetchEntrance($ein_id) {
+            $query = "SELECT * FROM eintritt WHERE ";
+            $query = $query."ein_id = ";
+            $query = $query.$ein_id;
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+
+            // transform mysql result set into object array 
+            $listEntrances = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $entranceObj = new entrance($data["ein_id"], $data["ein_kategorie"],
+                                            $data["ein_preis"], $data["ein_dauer"]);
+        
+                $listEntrances[] = $entranceObj;
+            }
+
+            return $listOfStays;
         }
     }
 ?>
