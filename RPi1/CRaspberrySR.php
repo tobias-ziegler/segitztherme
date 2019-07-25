@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Klasse CRaspberrySR
 // Projekt: RFID_SendReceive
 //
@@ -6,7 +6,7 @@
 // (C) C. Kilgenstein, 04/2019
 
 // Dieser Treiber benötigt auf der Gegenseite (Raspberry Pi) das
-// Programm sockserver.py //
+// Programm sockserver.py
 
 session_start();
 /**

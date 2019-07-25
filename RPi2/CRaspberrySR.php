@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Klasse CRaspberrySR
 // Projekt: RFID_SendReceive
 //
@@ -6,7 +6,7 @@
 // (C) C. Kilgenstein, 04/2019
 
 // Dieser Treiber benötigt auf der Gegenseite (Raspberry Pi) das
-// Programm sockserver.py //
+// Programm sockserver_9000.py
 
 session_start();
 /**
@@ -23,7 +23,7 @@ class CRaspberrySR
 	 * @param string $strIpAdress
 	 * @param string $strPort
 	 */
-	public function __construct($strIpAdress = "192.168.30.12", $strPort = '9020')
+	public function __construct($strIpAdress = "10.0.4.150", $strPort = '9000')
 	{
 		$this->strIpAdress = $strIpAdress;
 		$this->strPort = $strPort;
@@ -49,7 +49,6 @@ class CRaspberrySR
 		$result = socket_connect($this->socket, $this->strIpAdress, $this->strPort);
 		if ($result === false) {
 			echo "socket_connect() fehlgeschlagen.\nGrund: ($result) " . socket_strerror(socket_last_error($this->socket)) . "\n";
-			echo $this->socket, $this->strIpAdress, $this->strPort;
 		} else {
 			//echo "OK.\n";
 		}
