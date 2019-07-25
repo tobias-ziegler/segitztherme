@@ -11,7 +11,7 @@ export class CheckinComponent implements OnInit {
     @ViewChild("employeeID", { static: false })
     public employeeID: any;
 
-    private prices: any;
+    public prices: any;
     public selectedPrice: any;
 
     constructor(private httpClient: HttpClient, private router: Router) {}
@@ -34,7 +34,7 @@ export class CheckinComponent implements OnInit {
         }
 
         this.httpClient
-            .post("http://localhost:80/api/checkin/checkin.php", {
+            .post("http://localhost:80/api/CheckIn.php", {
                 priceId: this.selectedPrice.id,
                 employeeId: this.employeeID.nativeElement.value
             })

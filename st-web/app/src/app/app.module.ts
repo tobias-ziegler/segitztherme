@@ -16,9 +16,9 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MasterdataComponent } from "./admin/masterdata/masterdata.component";
 import { CheckinComponent } from "./admin/checkin/checkin.component";
-import { CheckinSuccesfulComponent } from "./admin/checkin-succesful/checkin-succesful.component";
 import { RestaurantComponent } from "./admin/restaurant/restaurant.component";
 import { StatisticsComponent } from "./admin/statistics/statistics.component";
+import { CheckoutComponent } from "./admin/checkout/checkout.component";
 
 const appRoutes: Routes = [
     { path: "home", component: HomeComponent },
@@ -26,6 +26,7 @@ const appRoutes: Routes = [
     { path: "selection", component: SelectionComponent },
     { path: "masterdata", component: MasterdataComponent },
     { path: "checkin", component: CheckinComponent },
+    { path: "checkout", component: CheckoutComponent },
     { path: "restaurant", component: RestaurantComponent },
     { path: "statistics", component: StatisticsComponent },
     { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -46,9 +47,9 @@ const appRoutes: Routes = [
         SelectionComponent,
         MasterdataComponent,
         CheckinComponent,
-        CheckinSuccesfulComponent,
         RestaurantComponent,
-        StatisticsComponent
+        StatisticsComponent,
+        CheckoutComponent
     ],
     imports: [
         BrowserModule,
