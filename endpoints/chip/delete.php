@@ -6,7 +6,5 @@
 
     $JsonChip = json_decode(file_get_contents('php://input'));
 
-    $chip = new TransponderChip($JsonChip->{"id"});
-
-    DatabaseUtil::addChip($chip->getChip_ID());
+    DatabaseUtil::deleteChip($JsonChip->{"id"});
 ?>

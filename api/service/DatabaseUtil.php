@@ -34,7 +34,7 @@
                 echo "Connection error to database!";
             }
             else {
-                mysqli_select_db($Con, "segitzThermeDatenbank");
+                mysqli_select_db($Con, "test");
             }
 
 		    return $Con;
@@ -80,13 +80,15 @@
 
         public static function updateConsumable($consumable) {
             $query = "UPDATE verpflegung SET ver_bezeichnung = ";
-            $query = $query.$consumable->getVer_bezeichnung();
+            $query = $query."\"";
+            $query = $query.$consumable->getVer_Bezeichnung();
+            $query = $query."\"";
             $query = $query.", ver_preis = ";
-            $query = $query.$consumable->getVer_preis();
+            $query = $query.$consumable->getVer_Preis();
             $query = $query.", ver_steuer = ";
-            $query = $query.$consumable->getVer_steuer();
+            $query = $query.$consumable->getVer_Steuer();
             $query = $query." WHERE ver_id = ";
-            $query = $query.$consumable->getVer_id();
+            $query = $query.$consumable->getVer_ID();
             $query = $query.";";
 
             // execute $query on DB
@@ -179,21 +181,35 @@
 
         public static function updateEmployee($employee) {
             $query = "UPDATE mitarbeiter SET mit_nachname = ";
-            $query = $query.$employee->getMit_nachname();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Nachname();
+            $query = $query."\"";
             $query = $query.", mit_vorname = ";
-            $query = $query.$employee->getMit_vorname();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Vorname();
+            $query = $query."\"";
             $query = $query.", mit_strasse = ";
-            $query = $query.$employee->getMit_strasse();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Strasse();
+            $query = $query."\"";
             $query = $query.", mit_ort = ";
-            $query = $query.$employee->getMit_ort();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Ort();
+            $query = $query."\"";
             $query = $query.", mit_plz = ";
-            $query = $query.$employee->getMit_plz();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_PLZ();
+            $query = $query."\"";
             $query = $query.", mit_login = ";
-            $query = $query.$employee->getMit_login();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Login();
+            $query = $query."\"";
             $query = $query.", mit_passwort = ";
-            $query = $query.$employee->getMit_passwort();
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Passwort();
+            $query = $query."\"";
             $query = $query." WHERE mit_id = ";
-            $query = $query.$employee->getMit_id();
+            $query = $query.$employee->getMit_ID();
             $query = $query.";";
 
             // execute $query on DB
@@ -209,7 +225,9 @@
             $query = $query."mit_vorname, ";
             $query = $query."mit_strasse, ";
             $query = $query."mit_ort, ";
-            $query = $query."mit_plz";
+            $query = $query."mit_plz, ";
+            $query = $query."mit_login, ";
+            $query = $query."mit_passwort";
             $query = $query.") VALUES (";
             $query = $query."\"";
             $query = $query.$employee->getMit_Nachname();
@@ -229,6 +247,14 @@
             $query = $query.", ";
             $query = $query."\"";
             $query = $query.$employee->getMit_PLZ();
+            $query = $query."\"";
+            $query = $query.", ";
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Login();
+            $query = $query."\"";
+            $query = $query.", ";
+            $query = $query."\"";
+            $query = $query.$employee->getMit_Passwort();
             $query = $query."\"";
             $query = $query.");";
 
@@ -302,11 +328,11 @@
         public static function updateChip($chip) {
             $query = "UPDATE chip SET chip_id = ";
             $query = $query."\"";
-            $query = $query.$chip->chip_id;
+            $query = $query.$chip->getChip_ID();
             $query = $query."\"";
             $query = $query." WHERE chip_id = ";
             $query = $query."\"";
-            $query = $query.$chip->chip_id;
+            $query = $query.$chip->getChip_ID();
             $query = $query."\"";
             $query = $query.";";
 
@@ -394,15 +420,21 @@
 
         public static function updateVIPCustomer($vipcustomer) {
             $query = "UPDATE vip_kunde SET kar_id = ";
-            $query = $query.$vipcustomer->kar_id;
+            $query = $query.$vipcustomer->getVIPCard_ID();
             $query = $query.", kun_nachname = ";
-            $query = $query.$vipcustomer->kun_nachname;
+            $query = $query."\"";
+            $query = $query.$vipcustomer->getKun_Nachname();
+            $query = $query."\"";
             $query = $query.", kun_vorname = ";
-            $query = $query.$vipcustomer->kun_vorname;
+            $query = $query."\"";
+            $query = $query.$vipcustomer->getKun_Vorname();
+            $query = $query."\"";
             $query = $query.", kun_geburtsdatum = ";
-            $query = $query.$vipcustomer->kun_geburtsdatum;
+            $query = $query."\"";
+            $query = $query.$vipcustomer->getKun_Geburtsdatum();
+            $query = $query."\"";
             $query = $query." WHERE kun_id = ";
-            $query = $query.$vipcustomer->kun_id;
+            $query = $query.$vipcustomer->getKun_ID();
             $query = $query.";";
 
             // execute $query on DB
@@ -501,11 +533,13 @@
 
         public static function updateVIPCard($vipcard) {
             $query = "UPDATE vip_karte SET kat_id = ";
-            $query = $query.$vipcard->kat_id;
+            $query = $query.$vipcard->getVIP_Kategorie();
             $query = $query.", kar_guthaben = ";
-            $query = $query.$vipcard->kar_guthaben;
+            $query = $query."\"";
+            $query = $query.$vipcard->getVIP_Guthaben();
+            $query = $query."\"";
             $query = $query." WHERE kar_id = ";
-            $query = $query.$vipcard->kar_id;
+            $query = $query.$vipcard->getVIPCard_ID();
             $query = $query.";";
 
             // execute $query on DB
@@ -522,7 +556,9 @@
             $query = $query.") VALUES (";
             $query = $query.$vipCard->getVIP_Kategorie();
             $query = $query.", ";
+            $query = $query."\"";
             $query = $query.$vipCard->getVIP_Guthaben();
+            $query = $query."\"";
             $query = $query.");";
 
             // execute $query on DB
@@ -555,8 +591,8 @@
             $listOfVIPCards = array();
 
             while($data = mysqli_fetch_assoc($Result)) {
-                $vipCardObj = new VIPCard($data["vip_id"], $data["vip_guthaben"],
-                                            $data["vip_kategorie"], $data["vip_rabatt"]);
+                $vipCardObj = new VIPCard($data["kar_id"], $data["kat_id"],
+                                            $data["kar_guthaben"]);
         
                 $listOfVIPCards[] = $vipCardObj;
             }
@@ -599,101 +635,6 @@
             // execute $query on DB
             $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
-		
-		/**
-         * This method delivers all Costumer stays from the database.
-         */
-		public static function getAllStays() {
-            $query = "SELECT * FROM aufenthalt;";
-
-            // execute $query on DB
-            $Result = DatabaseUtil::executeDatabaseQuery($query);
-            
-            // transform mysql result set into object array 
-            $listOfStays = array();
-
-            while($data = mysqli_fetch_assoc($Result)) {
-                $stayObj = new Stay($data["auf_id"], $data["chip_id"],
-                                            $data["ein_id"], $data["mit_id_an"]
-											, $data["mit_id_ab"], $data["kun_id"]
-											, $data["auf_ankunft"], $data["auf_abfahrt"]);
-        
-                $listOfStays[] = $stayObj;
-            }
-
-            return $listOfStays;
-        }
-		/**
-         * This method gets the specific stay with the stay_id.
-         */
-        public static function fetchStay($auf_id) {
-            $query = "SELECT * FROM aufenthalt WHERE ";
-            $query = $query."auf_id = ";
-            $query = $query.$auf_id;
-            $query = $query.";";
-
-            // execute $query on DB
-            $Result = DatabaseUtil::executeDatabaseQuery($query);
-
-            // transform mysql result set into object array 
-            $listStays = array();
-
-            while($data = mysqli_fetch_assoc($Result)) {
-                $stayObj = new Stay($data["auf_id"], $data["chip_id"],
-                                            $data["ein_id"], $data["mit_id_an"]
-											, $data["mit_id_ab"], $data["kun_id"]
-											, $data["auf_ankunft"], $data["auf_abfahrt"]);
-        
-                $listOfStays[] = $stayObj;
-            }
-
-            return $listOfStays;
-        }
-		 /**
-         * This method adds a stay to the database.
-         */
-        public static function addStay($stay, $chip_id) {
-            $query = "INSERT INTO aufenthalt (";
-            $query .= "chip_id, ein_id, mit_id_an, mit_id_ab, kun_id, auf_ankunft, auf_abfahrt";
-            $query .= ") VALUES (";
-			$query .= "\"";
-            $query .= $chip_id;
-			$query .= "\"";
-            $query .= ", ";
-			$query .= "\"";
-			$query .= $stay->getEin_id();
-			$query .= "\"";
-            $query .= ", ";
-			$query .= "\"";
-			$query .= $stay->getMit_id_an();
-			$query .= "\"";
-            $query .= ", ";
-			$query .= "\"";
-			if($stay->getMit_id_ab() == ""){
-				$query .= "null";
-			}
-			else{
-			$query .= $stay->getMit_id_ab();
-			}
-			$query .= "\"";
-            $query .= ", ";
-			$query .= "\"";
-			$query .= $stay->getKun_id();
-			$query .= "\"";
-            $query .= ", ";
-			$query .= "\"";
-			$query .= $stay->getAuf_ankunft();
-			$query .= "\"";
-            $query .= ", ";
-			$query .= "\"";
-			$query .= $stay->getAuf_abfahrt();
-			$query .= "\"";
-            $query .= ");";
-
-            // execute $query on DB
-            $Result = DatabaseUtil::executeDatabaseQuery($query);
-			echo $query;
-        }
 
         /**
          * This method delivers all Entrances from the database.
@@ -715,40 +656,6 @@
             }
 
             return $listOfEntrances;
-        }
-
-        /**
-         * This method deletes a VIPCard from the database.
-         */
-        public static function deleteStay($auf_id) {
-            $query = "DELETE FROM aufenthalt WHERE ";
-            $query = $query."auf_id = ";
-            $query = $query.$auf_id;
-            $query = $query.";";
-
-            // execute $query on DB
-            $Result = DatabaseUtil::executeDatabaseQuery($query);
-        }
-		public static function fetchEntrance($ein_id) {
-            $query = "SELECT * FROM eintritt WHERE ";
-            $query = $query."ein_id = ";
-            $query = $query.$ein_id;
-            $query = $query.";";
-
-            // execute $query on DB
-            $Result = DatabaseUtil::executeDatabaseQuery($query);
-
-            // transform mysql result set into object array 
-            $listEntrances = array();
-
-            while($data = mysqli_fetch_assoc($Result)) {
-                $entranceObj = new entrance($data["ein_id"], $data["ein_kategorie"],
-                                            $data["ein_preis"], $data["ein_dauer"]);
-        
-                $listEntrances[] = $entranceObj;
-            }
-
-            return $listOfStays;
         }
     }
 ?>
