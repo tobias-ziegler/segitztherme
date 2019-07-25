@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 @Component({
     selector: "app-checkin",
@@ -8,6 +8,9 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./checkin.component.css"]
 })
 export class CheckinComponent implements OnInit {
+    @ViewChild("employeeID", { static: false })
+    public employeeID: any;
+
     private prices: any;
     public selectedPrice: any;
 
@@ -18,7 +21,6 @@ export class CheckinComponent implements OnInit {
             .get("http://localhost:80/api/entrance/get.php")
             .subscribe(response => {
                 this.prices = response;
-                console.log(response);
             });
     }
 
@@ -26,7 +28,22 @@ export class CheckinComponent implements OnInit {
         this.selectedPrice = price;
     }
 
-    public onMenuButtonClicked() {
+    public onCheckinButtonClicked(): void {
+        if (!this.selectedPrice) {
+            return;
+        }
+
+        this.httpClient
+            .post("http://localhost:80/api/checkin/checkin.php", {
+                priceId: this.selectedPrice.id,
+                employeeId: this.employeeID.nativeElement.value
+            })
+            .subscribe(() => {
+                window.location.reload(false);
+            });
+    }
+
+    public onMenuButtonClicked(): void {
         this.router.navigate(["selection"]);
     }
 }

@@ -18,7 +18,7 @@ import { MasterdataComponent } from "./admin/masterdata/masterdata.component";
 import { CheckinComponent } from "./admin/checkin/checkin.component";
 import { CheckinSuccesfulComponent } from "./admin/checkin-succesful/checkin-succesful.component";
 import { RestaurantComponent } from "./admin/restaurant/restaurant.component";
-import { StatisticsComponent } from './admin/statistics/statistics.component';
+import { StatisticsComponent } from "./admin/statistics/statistics.component";
 
 const appRoutes: Routes = [
     { path: "home", component: HomeComponent },
@@ -27,6 +27,7 @@ const appRoutes: Routes = [
     { path: "masterdata", component: MasterdataComponent },
     { path: "checkin", component: CheckinComponent },
     { path: "restaurant", component: RestaurantComponent },
+    { path: "statistics", component: StatisticsComponent },
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "**", redirectTo: "/home", pathMatch: "full" }
 ];

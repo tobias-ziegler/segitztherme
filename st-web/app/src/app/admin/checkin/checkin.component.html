@@ -9,7 +9,7 @@
         style="position: relative; top: 15%; margin: 5%;"
         class="row justify-content-around"
     >
-        <div class="col text-center">
+        <div class="col-6 text-center">
             <div
                 class="btn-group btn-group-lg"
                 role="group"
@@ -25,19 +25,31 @@
                     {{ price.kategorie }}
                 </button>
             </div>
+            <form>
+                <div class="form-group">
+                    <input
+                        #employeeID
+                        type="text"
+                        class="form-control"
+                        id="inputID"
+                        placeholder="Mitarbeiter ID eingeben"
+                        required
+                    />
+                </div>
+            </form>
             <div class="h1" style="margin: 5%;">
                 Zu zahlender Betrag: {{ selectedPrice.preis }} €
             </div>
             <div class="text-center">
                 <button
-                    (click)="onContinue()"
+                    (click)="onCheckinButtonClicked()"
                     type="button"
                     class="btn btn-primary btn-lg"
                 >
                     Check-In
                 </button>
             </div>
-            <div style="margin: 1%" class="text-center">
+            <div style="margin: 5%" class="text-center">
                 <button
                     (click)="onMenuButtonClicked()"
                     type="button"

@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.css']
+    selector: "app-statistics",
+    templateUrl: "./statistics.component.html",
+    styleUrls: ["./statistics.component.css"]
 })
 export class StatisticsComponent implements OnInit {
+    constructor(private router: Router) {}
 
-  constructor() { }
+    ngOnInit() {}
 
-  ngOnInit() {
-  }
-
+    public onMenuButtonClicked() {
+        this.router.navigate(["selection"]);
+    }
 }
