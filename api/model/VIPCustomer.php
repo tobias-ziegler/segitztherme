@@ -12,7 +12,7 @@
 
         private $kun_id;
 
-        private $vipcard_id;
+        private $kar_id;
 
         private $kun_nachname;
 
@@ -20,9 +20,9 @@
 
         private $kun_geburtsdatum;
 
-        public function __construct($kun_id, $vipcard_id, $kun_nachname, $kun_vorname, $kun_geburtsdatum) {
+        public function __construct($kun_id, $kar_id, $kun_nachname, $kun_vorname, $kun_geburtsdatum) {
             $this->kun_id = $kun_id;
-            $this->vipcard_id = $vipcard_id;
+            $this->kar_id = $kar_id;
             $this->kun_nachname = $kun_nachname;
             $this->kun_vorname = $kun_vorname;
             $this->kun_geburtsdatum = $kun_geburtsdatum;
@@ -33,11 +33,11 @@
         }
 
         public function getVIPCard_ID() {
-            return $this->vipcard_id;
+            return $this->kar_id;
         }
 
-        public function setVIPCard_ID($vipcard_id) {
-            $this->vipcard_id = $vipcard_id;
+        public function setVIPCard_ID($kar_id) {
+            $this->kar_id = $kar_id;
         }
 
         public function getKun_Nachname() {
@@ -67,7 +67,7 @@
         public function jsonSerialize() {
             return [
                 "id" => $this->kun_id,
-                "vipcardId" => $this->vipcard_id,
+                "vipcardId" => $this->kar_id,
                 "nachname" => $this->kun_nachname,
                 "vorname" => $this->kun_vorname,
                 "geburtsdatum" => $this->kun_geburtsdatum
