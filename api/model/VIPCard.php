@@ -10,55 +10,43 @@
      */
     class VIPCard implements JsonSerializable {
         
-        private $vipcard_id;
+        private $kar_id;
 
-        private $vip_guthaben;
+        private $kat_id;
 
-        private $vip_kategorie;
+        private $kar_guthaben;
 
-        private $vip_rabatt;
-
-        public function __construct($vipcard_id, $vip_guthaben, $vip_kategorie, $vip_rabatt) {
-            $this->vipcard_id = $vipcard_id;
-            $this->vip_guthaben = $vip_guthaben;
-            $this->vip_kategorie = $vip_kategorie;
-            $this->vip_rabatt = $vip_rabatt;
+        public function __construct($kar_id, $kat_id, $kar_guthaben) {
+            $this->kar_id = $kar_id;
+            $this->kat_id = $kat_id;
+            $this->kar_guthaben = $kar_guthaben;
         }
 
         public function getVIPCard_ID() {
-            return $this->vipcard_id;
-        }
-
-        public function getVIP_Guthaben() {
-            return $this->vip_guthaben;
-        }
-
-        public function setVIP_Guthaben($vip_guthaben) {
-            $this->vip_guthaben = $vip_guthaben;
+            return $this->kar_id;
         }
         
         public function getVIP_Kategorie() {
-            return $this->vip_kategorie;
+            return $this->kat_id;
         }
 
-        public function setVIP_Kategorie($vip_kategorie) {
-            $this->vip_kategorie = $vip_kategorie;
+        public function setVIP_Kategorie($kat_id) {
+            $this->kat_id = $kat_id;
         }
 
-        public function getVIP_Rabatt() {
-            return $this->vip_rabatt;
+        public function getVIP_Guthaben() {
+            return $this->kar_guthaben;
         }
 
-        public function setVIP_Rabatt($vip_rabatt) {
-            $this->vip_rabatt = $vip_rabatt;
+        public function setVIP_Guthaben($kar_guthaben) {
+            $this->kar_guthaben = $kar_guthaben;
         }
 
         public function jsonSerialize() {
             return [
-                "id" => $this->vipcard_id,
-                "guthaben" => $this->vip_guthaben,
-                "kategorie" => $this->vip_kategorie,
-                "rabatt" => $this->vip_rabatt
+                "id" => $this->kar_id,
+                "kategorieId" => $this->kat_id,
+                "guthaben" => $this->kar_guthaben
             ];
         }
     }

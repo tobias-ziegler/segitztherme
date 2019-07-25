@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="container view">
+    <div style="position: relative; top: 15%" class="row align-items-center">
+        <div class="col">
+            <h1 class="display-4">Restaurant</h1>
+        </div>
+
+        <div class="col-12">
+            <div
+                *ngFor="let consumableChunk of consumables"
+                class="row justify-content-around"
+                style="margin: 5%"
+            >
+                <div
+                    *ngFor="let consumable of consumableChunk"
+                    class="card"
+                    style="width: 18rem; "
+                >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ consumable.bezeichnung }}</h5>
+                        <h1 class="display-4">{{ consumable.preis }} €</h1>
+                        <div class="row justify-content-around">
+                            <div>Anzahl: {{ consumable.count }}</div>
+                            <button
+                                href=""
+                                (click)="addToCart($event, consumable); (false)"
+                                class="btn btn-primary"
+                            >
+                                +
+                            </button>
+                            <a
+                                href=""
+                                (click)="
+                                    removeFromCart($event, consumable); (false)
+                                "
+                                class="btn btn-primary"
+                                >-</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h1" style="margin: 5%;">
+                Zu zahlender Betrag: {{ total }} €
+            </div>
+            <div style="margin: 5%" class="text-center">
+                <button
+                    (click)="onBookButtonClicked()"
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                >
+                    Buchen
+                </button>
+            </div>
+            <div style="margin: 5%" class="text-center">
+                <button
+                    (click)="onMenuButtonClicked()"
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                >
+                    Menü
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

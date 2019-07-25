@@ -34,7 +34,7 @@
                 echo "Connection error to database!";
             }
             else {
-                mysqli_select_db($Con, "test");
+                mysqli_select_db($Con, "dummy");
             }
 
 		    return $Con;
@@ -76,6 +76,21 @@
             }
 
             return $listOfConsumables;
+        }
+
+        public static function updateConsumable($consumable) {
+            $query = "UPDATE verpflegung SET ver_bezeichnung = ";
+            $query = $query.$consumable->getVer_bezeichnung();
+            $query = $query.", ver_preis = ";
+            $query = $query.$consumable->getVer_preis();
+            $query = $query.", ver_steuer = ";
+            $query = $query.$consumable->getVer_steuer();
+            $query = $query." WHERE ver_id = ";
+            $query = $query.$consumable->getVer_id();
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
         }
 
         /**
@@ -162,10 +177,34 @@
             return $listOfEmployees;
         }
 
+        public static function updateEmployee($employee) {
+            $query = "UPDATE mitarbeiter SET mit_nachname = ";
+            $query = $query.$employee->getMit_nachname();
+            $query = $query.", mit_vorname = ";
+            $query = $query.$employee->getMit_vorname();
+            $query = $query.", mit_strasse = ";
+            $query = $query.$employee->getMit_strasse();
+            $query = $query.", mit_ort = ";
+            $query = $query.$employee->getMit_ort();
+            $query = $query.", mit_plz = ";
+            $query = $query.$employee->getMit_plz();
+            $query = $query.", mit_login = ";
+            $query = $query.$employee->getMit_login();
+            $query = $query.", mit_passwort = ";
+            $query = $query.$employee->getMit_passwort();
+            $query = $query." WHERE mit_id = ";
+            $query = $query.$employee->getMit_id();
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+
         /**
          * This method adds an Employee to the database.
          */
         public static function addEmployee($employee) {
+            echo json_encode($employee);
             $query = "INSERT INTO mitarbeiter (";
             $query = $query."mit_nachname, ";
             $query = $query."mit_vorname, ";
@@ -241,7 +280,9 @@
         public static function fetchChip($chipID) {
             $query = "SELECT * FROM chip WHERE ";
             $query = $query."chip_id = ";
+            $query = $query."\"";
             $query = $query.$chipID;
+            $query = $query."\"";
             $query = $query.";";
 
             // execute $query on DB
@@ -259,6 +300,21 @@
             return $listOfChips;
         }
 
+        public static function updateChip($chip) {
+            $query = "UPDATE chip SET chip_id = ";
+            $query = $query."\"";
+            $query = $query.$chip->chip_id;
+            $query = $query."\"";
+            $query = $query." WHERE chip_id = ";
+            $query = $query."\"";
+            $query = $query.$chip->chip_id;
+            $query = $query."\"";
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+
         /**
          * This method adds an Chip to the database.
          */
@@ -266,7 +322,9 @@
             $query = "INSERT INTO chip (";
             $query = $query."chip_id";
             $query = $query.") VALUES (";
-            $query = $query.$chipID;
+            $query = $query."\"";
+            $query = $query.$chipID->getChip_ID();
+            $query = $query."\"";
             $query = $query.");";
 
             // execute $query on DB
@@ -277,9 +335,12 @@
          * This method deletes a Chip from the database.
          */
         public static function deleteChip($chipID) {
+            echo json_encode($chipID);
             $query = "DELETE FROM chip WHERE ";
             $query = $query."chip_id = ";
+            $query = $query."\"";
             $query = $query.$chipID;
+            $query = $query."\"";
             $query = $query.";";
 
             // execute $query on DB
@@ -323,7 +384,7 @@
             $listOfVIPCustomers = array();
 
             while($data = mysqli_fetch_assoc($Result)) {
-                $vipCustomerObj = new VIPCustomer($data["kun_id"], $data["vip_id"],
+                $vipCustomerObj = new VIPCustomer($data["kun_id"], $data["kar_id"],
                                                     $data["kun_nachname"], $data["kun_vorname"],
                                                     $data["kun_geburtsdatum"]);
         
@@ -333,12 +394,29 @@
             return $listOfVIPCustomers;
         }
 
+        public static function updateVIPCustomer($vipcustomer) {
+            $query = "UPDATE vip_kunde SET kar_id = ";
+            $query = $query.$vipcustomer->kar_id;
+            $query = $query.", kun_nachname = ";
+            $query = $query.$vipcustomer->kun_nachname;
+            $query = $query.", kun_vorname = ";
+            $query = $query.$vipcustomer->kun_vorname;
+            $query = $query.", kun_geburtsdatum = ";
+            $query = $query.$vipcustomer->kun_geburtsdatum;
+            $query = $query." WHERE kun_id = ";
+            $query = $query.$vipcustomer->kun_id;
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+
         /**
          * This method adds an VIPCustomer to the database.
          */
         public static function addVIPCustomer($vipCustomer) {
             $query = "INSERT INTO vip_kunde (";
-            $query = $query."vip_id, ";
+            $query = $query."kar_id, ";
             $query = $query."kun_vorname, ";
             $query = $query."kun_nachname, ";
             $query = $query."kun_geburtsdatum";
@@ -401,10 +479,10 @@
         /**
          * This method gets the specific VIPCard with the vip_id.
          */
-        public static function fetchVIPCard($vip_id) {
+        public static function fetchVIPCard($kar_id) {
             $query = "SELECT * FROM vip_karte WHERE ";
-            $query = $query."vip_id = ";
-            $query = $query.$vip_id;
+            $query = $query."kar_id = ";
+            $query = $query.$kar_id;
             $query = $query.";";
 
             // execute $query on DB
@@ -414,8 +492,8 @@
             $listOfVIPCards = array();
 
             while($data = mysqli_fetch_assoc($Result)) {
-                $vipCardObj = new VIPCard($data["vip_id"], $data["vip_guthaben"],
-                                            $data["vip_kategorie"], $data["vip_rabatt"]);
+                $vipCardObj = new VIPCard($data["kar_id"], $data["kat_id"],
+                                            $data["kar_guthaben"]);
         
                 $listOfVIPCards[] = $vipCardObj;
             }
@@ -423,13 +501,29 @@
             return $listOfVIPCards;
         }
 
+        public static function updateVIPCard($vipcard) {
+            $query = "UPDATE vip_karte SET kat_id = ";
+            $query = $query.$vipcard->kat_id;
+            $query = $query.", kar_guthaben = ";
+            $query = $query.$vipcard->kar_guthaben;
+            $query = $query." WHERE kar_id = ";
+            $query = $query.$vipcard->kar_id;
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+
         /**
          * This method adds an VIPCard to the database.
          */
         public static function addVIPCard($vipCard) {
             $query = "INSERT INTO vip_karte (";
-            $query = $query."vip_guthaben";
+            $query = $query."kat_id, ";
+            $query = $query."kar_guthaben";
             $query = $query.") VALUES (";
+            $query = $query.$vipCard->getVIP_Kategorie();
+            $query = $query.", ";
             $query = $query.$vipCard->getVIP_Guthaben();
             $query = $query.");";
 
@@ -440,10 +534,10 @@
         /**
          * This method deletes a VIPCard from the database.
          */
-        public static function deleteVIPCard($vip_id) {
+        public static function deleteVIPCard($kar_id) {
             $query = "DELETE FROM vip_karte WHERE ";
-            $query = $query."vip_id = ";
-            $query = $query.$vip_id;
+            $query = $query."kar_id = ";
+            $query = $query.$kar_id;
             $query = $query.";";
 
             // execute $query on DB
@@ -470,6 +564,64 @@
             }
 
             return $listOfVIPCards;
+        }
+
+        /**
+         * This method adds a Purchase to the database.
+         */
+        public static function addPurchase($purchase) {
+            $query = "INSERT INTO einkauf (";
+            $query = $query."auf_id, ";
+            $query = $query."ver_id, ";
+            $query = $query."ein_betrag, ";
+            $query = $query."ein_menge";
+            $query = $query.") VALUES (";
+            $query = $query.$purchase->getAuf_ID();
+            $query = $query.", ";
+            $query = $query.$purchase->getVer_ID();
+            $query = $query.", ";
+            $query = $query.$purchase->getEin_Betrag();
+            $query = $query.", ";
+            $query = $query.$purchase->getEin_Menge();
+            $query = $query.");";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+
+        /**
+         * This method deletes a Purchase from the database.
+         */
+        public static function deletePurchase($ein_id) {
+            $query = "DELETE FROM einkauf WHERE ";
+            $query = $query."ein_id = ";
+            $query = $query.$ein_id;
+            $query = $query.";";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+        }
+
+        /**
+         * This method delivers all Entrances from the database.
+         */
+        public static function getAllEntrances() {
+            $query = "SELECT * FROM eintritt;";
+
+            // execute $query on DB
+            $Result = DatabaseUtil::executeDatabaseQuery($query);
+            
+            // transform mysql result set into object array 
+            $listOfEntrances = array();
+
+            while($data = mysqli_fetch_assoc($Result)) {
+                $entranceObj = new Entrance($data["ein_id"], $data["ein_kategorie"],
+                                            $data["ein_preis"], $data["ein_dauer"]);
+        
+                $listOfEntrances[] = $entranceObj;
+            }
+
+            return $listOfEntrances;
         }
     }
 ?>

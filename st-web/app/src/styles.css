@@ -61,8 +61,8 @@ hr {
     background-color: white;
 }
 
-.about-banner__description  * {
-    color: #0C408E;
+.about-banner__description * {
+    color: #0c408e;
     border-color: black;
 }
 
@@ -70,7 +70,7 @@ hr {
 * prices
 */
 .price {
-    background-color: #0C408E;
+    background-color: #0c408e;
 }
 
 .price__header {
@@ -82,7 +82,7 @@ hr {
 }
 
 .price-box * {
-    color: #0C408E;
+    color: #0c408e;
     padding: 5%;
 }
 
@@ -90,7 +90,7 @@ hr {
 * contact
 */
 .contact__header * {
-    color: #0C408E;
+    color: #0c408e;
     border-color: black;
 }
 
@@ -98,7 +98,7 @@ hr {
 * footer
 */
 .footer-content {
-    background-color: #0C408E;
+    background-color: #0c408e;
 }
 
 .footer-content * {
@@ -113,7 +113,6 @@ hr {
     height: 100vh;
 }
 
-
 /*
 * misc.
 */
@@ -127,7 +126,15 @@ hr {
 }
 
 html * {
-   font-size: 1em;
-   color: #000;
-   font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: #000;
+    font-family: "Roboto", sans-serif;
+}
+
+nav {
+    z-index: 9999;
+}
+
+footer {
+    z-index: 9999;
 }
