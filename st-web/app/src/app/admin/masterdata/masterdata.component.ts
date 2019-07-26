@@ -17,6 +17,9 @@ export class MasterdataComponent implements OnInit {
     @ViewChild("consumableTax", { static: false })
     public consumableTax: ElementRef;
 
+    @ViewChild("chipId", { static: false })
+    public chipId: ElementRef;
+
     @ViewChild("employeeFirstName", { static: false })
     public employeeFirstName: ElementRef;
 
@@ -31,6 +34,9 @@ export class MasterdataComponent implements OnInit {
 
     @ViewChild("employeePostalCode", { static: false })
     public employeePostalCode: ElementRef;
+
+    @ViewChild("employeeLogin", { static: false })
+    public employeeLogin: ElementRef;
 
     public consumables: any;
     public chips: any;
@@ -127,7 +133,7 @@ export class MasterdataComponent implements OnInit {
             .post(
                 "http://localhost:80/api/chip/create.php",
                 JSON.stringify({
-                    id: 0
+                    id: this.chipId.nativeElement.value
                 })
             )
             .subscribe(() => {
@@ -162,7 +168,7 @@ export class MasterdataComponent implements OnInit {
                     strasse: this.employeeStreet.nativeElement.value,
                     ort: this.employeeCity.nativeElement.value,
                     plz: this.employeePostalCode.nativeElement.value,
-                    login: "",
+                    login: this.employeeLogin.nativeElement.value,
                     passwort: ""
                 })
             )

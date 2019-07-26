@@ -8,5 +8,5 @@
 
     $chip = new TransponderChip($JsonChip->{"id"});
 
-    DatabaseUtil::addChip($chip);
+    DatabaseUtil::addChip($chip->getChip_ID());
 ?>

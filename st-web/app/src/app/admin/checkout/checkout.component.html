@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="container view">
+    <div style="position: relative; top: 15%" class="row align-items-center">
+        <div class="col">
+            <h1 class="display-4">Check-Out</h1>
+        </div>
+    </div>
+    <div
+        style="position: relative; top: 15%; margin: 5%;"
+        class="row justify-content-around"
+    >
+        <div class="col-6 text-center">
+            <div class="text-center">
+                <button
+                    (click)="onCheckoutButtonClicked()"
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                >
+                    Check-Out
+                </button>
+            </div>
+            <div *ngIf="price" class="h1" style="margin: 5%;">
+                Zu zahlender Betrag: {{ price }}€
+            </div>
+            <div style="margin: 5%" class="text-center">
+                <button
+                    (click)="onPrintButtonClicked()"
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                >
+                    Drucken
+                </button>
+            </div>
+            <div style="margin: 5%" class="text-center">
+                <button
+                    (click)="onMenuButtonClicked()"
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                >
+                    Menü
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

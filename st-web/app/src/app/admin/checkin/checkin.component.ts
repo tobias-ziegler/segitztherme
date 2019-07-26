@@ -1,3 +1,4 @@
+import { PrintService } from "./../../service/print.service";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
@@ -11,10 +12,14 @@ export class CheckinComponent implements OnInit {
     @ViewChild("employeeID", { static: false })
     public employeeID: any;
 
-    private prices: any;
+    public prices: any;
     public selectedPrice: any;
 
-    constructor(private httpClient: HttpClient, private router: Router) {}
+    constructor(
+        private httpClient: HttpClient,
+        private router: Router,
+        private printService: PrintService
+    ) {}
 
     ngOnInit() {
         this.httpClient
@@ -34,13 +39,23 @@ export class CheckinComponent implements OnInit {
         }
 
         this.httpClient
-            .post("http://localhost:80/api/checkin/checkin.php", {
-                priceId: this.selectedPrice.id,
-                employeeId: this.employeeID.nativeElement.value
-            })
+            .post(
+                "http://localhost:80/api/CheckIn.php",
+                JSON.stringify({
+                    priceId: this.selectedPrice.id,
+                    employeeId: this.employeeID.nativeElement.value
+                })
+            )
             .subscribe(() => {
                 window.location.reload(false);
             });
+    }
+
+    public onPrintButtonClicked(): void {
+        this.printService.printCheckinReceipt(
+            this.selectedPrice.preis,
+            this.selectedPrice.kategorie
+        );
     }
 
     public onMenuButtonClicked(): void {

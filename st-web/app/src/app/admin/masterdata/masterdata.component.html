@@ -33,7 +33,7 @@
                     data-parent="#accordion"
                 >
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-fluid">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -121,7 +121,7 @@
                     data-parent="#accordion"
                 >
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-fluid">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -141,6 +141,7 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <input #chipId placeholder="Chip-ID" />
                                     </td>
                                     <td>
                                         <a href="" (click)="createChip($event); false">
@@ -176,7 +177,7 @@
                     data-parent="#accordion"
                 >
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-fluid">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -185,6 +186,7 @@
                                     <th scope="col">Straße</th>
                                     <th scope="col">Ort</th>
                                     <th scope="col">PLZ</th>
+                                    <th scope="col">Login</th>
                                     <th scope="col">Ändern</th>
                                     <th scope="col">Löschen</th>
                                 </tr>
@@ -208,6 +210,9 @@
                                     </td>
                                     <td>
                                         <input [(ngModel)]="employee.plz" value="{{ employee.plz }}" />
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="employee.login" value="{{ employee.login }}" />
                                     </td>
                                     <td>
                                         <a href="" (click)="updateEmployee($event, employee); false">
@@ -244,6 +249,9 @@
                                             <input #employeePostalCode placeholder="PLZ" />
                                         </td>
                                         <td>
+                                            <input #employeeLogin placeholder="Login" />
+                                        </td>
+                                        <td>
                                             <a href="" (click)="createEmployee($event); false">
                                                 <i class="material-icons">
                                                     add_box
@@ -278,7 +286,7 @@
                     data-parent="#accordion"
                 >
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-fluid">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>

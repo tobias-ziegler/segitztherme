@@ -1,6 +1,6 @@
 <?php
     require("../service/DatabaseUtil.php");
-    require("../model/VIPCustomer.php");
+    require("../model/VIPCustomer.php.php");
 
     header("Access-Control-Allow-Origin: *");
 
